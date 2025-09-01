@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salones CRA</title>
+  <link rel="stylesheet" href="/static/styles.css?v=20250830092750">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+
+<body>
+  <header>
+    <h1>Gestión de Salones CRA</h1>
+    <nav>
+      {% if user.is_authenticated %}
+      <a href="/reservas/" {% if '/reservas/' in request.path %}class="active"{% endif %}>Reservas</a>
+      {% endif %}
+      {% if user.is_authenticated and user.is_staff %}
+      <a href="/bloqueos/" {% if '/bloqueos/' in request.path %}class="active"{% endif %}>Bloqueos</a>
+      <a href="/materiales/" {% if '/materiales/' in request.path %}class="active"{% endif %}>Materiales</a>
+      <a href="/inventario/" {% if '/inventario/' in request.path %}class="active"{% endif %}>Inventario</a>
+      <a href="/usuarios/" {% if '/usuarios/' in request.path %}class="active"{% endif %}>Usuarios</a>
+      <a href="/reportes/" {% if '/reportes/' in request.path %}class="active"{% endif %}>Reportes</a>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <a href="/cuentas/logout/">Cerrar sesión ({{ user.username }})</a>
+      {% else %}
+      <a href="/cuentas/login/" {% if '/cuentas/login/' in request.path %}class="active"{% endif %}>Iniciar sesión</a>
+      <a href="/cuentas/registro/" {% if '/cuentas/registro/' in request.path %}class="active"{% endif %}>Registrarse</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    {% if messages %}
+    <ul class="flash">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <script>
+    // Force page refresh to prevent cache issues with authentication state
+    if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+      location.reload();
+    }
+
+    function clearCache() {
+      // Clear browser cache and force reload
+      if ('caches' in window) {
+        caches.keys().then(function (names) {
+          names.forEach(function (name) {
+            caches.delete(name);
+          });
+        });
+      }
+      // Force reload after logout
+      setTimeout(function () {
+        window.location.href = window.location.href + '?t=' + new Date().getTime();
+      }, 100);
+    }
+
+    // Debug authentication state
+    console.log('User authenticated:', '{{ user.is_authenticated|yesno:"true,false" }}');
+    console.log('User is staff:', '{{ user.is_staff|yesno:"true,false" }}');
+  </script>
+</body>
+
+</html>
