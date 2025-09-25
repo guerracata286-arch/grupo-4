@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba de Estilos CSS</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Aquí se enlaza tu CSS -->
+</head>
+<body>
+  <header>
+    <h1>Sistema de Prueba</h1>
+    <nav>
+      <a href="#" class="active">Inicio</a>
+      <a href="#">Reservas</a>
+      <a href="#">Usuarios</a>
+      <a href="#">Reportes</a>
+    </nav>
+  </header>
+
+  <!-- Mensajes flash -->
+  <ul class="flash">
+    <li class="success">Operación realizada con éxito.</li>
+    <li class="error">Hubo un error en la operación.</li>
+  </ul>
+
+  <!-- Tarjetas -->
+  <div class="grid">
+    <div class="card">
+      <h2>Tarjeta 1</h2>
+      <p>Ejemplo de tarjeta con contenido y un <a href="#" class="btn btn-primary">Botón</a>.</p>
+    </div>
+    <div class="card">
+      <h2>Tarjeta 2</h2>
+      <p>Otro ejemplo con un <a href="#" class="btn btn-danger">Botón rojo</a>.</p>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <h2 style="margin-top:2rem;">Tabla de usuarios</h2>
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ana Pérez</td>
+          <td><span class="badge staff">Staff</span></td>
+          <td><span class="status active">Activo</span></td>
+        </tr>
+        <tr>
+          <td>Juan Gómez</td>
+          <td><span class="badge regular">Usuario</span></td>
+          <td><span class="status inactive">Inactivo</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulario -->
+  <div class="form-container">
+    <h2>Formulario de Reserva</h2>
+    <form class="reservation-form">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre">
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha">
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Reservar</button>
+        <button type="reset" class="btn btn-secondary">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+
+
